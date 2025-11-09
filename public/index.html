@@ -574,6 +574,87 @@
             line-height: 1.5;
         }
 
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-container {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(168, 85, 247, 0.08);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #a855f7;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .faq-answer ul {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin: 0.5rem 0 0 1.5rem;
+        }
+
+        .faq-answer li {
+            margin: 0.3rem 0;
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 6rem 2rem;
@@ -760,6 +841,19 @@
                 height: 45px;
                 font-size: 1.3rem;
             }
+
+            .faq-question {
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
+
+            .faq-icon {
+                font-size: 1.3rem;
+            }
+
+            .faq-answer {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -809,6 +903,7 @@
                 <li><a href="#benefits">Confidencial</a></li>
                 <li><a href="#benefits">Portable</a></li>
                 <li><a href="#benefits">Con sus datos</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
 
@@ -829,6 +924,7 @@
                 <li><a href="#benefits" onclick="closeSidebar()">Confidencial</a></li>
                 <li><a href="#benefits" onclick="closeSidebar()">Portable</a></li>
                 <li><a href="#benefits" onclick="closeSidebar()">Con sus datos</a></li>
+                <li><a href="#faq" onclick="closeSidebar()">FAQ</a></li>
                 <li><a href="#contact" onclick="closeSidebar()">Contacto</a></li>
             </ul>
         </aside>
@@ -948,6 +1044,131 @@
                 <div class="benefit-item">
                     <h4>🖥️ Multiplataforma</h4>
                     <p>Linux, Windows. Laptop, servidor. Una IA que se adapta a ti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">Preguntas <span class="gradient-text">Frecuentes</span></h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué es "IA solo para Mí"?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Es una solución de Inteligencia Artificial que se instala localmente en tu laptop, computador o servidor. Tus datos nunca salen de tu dispositivo, garantizando privacidad total. No necesitas internet para usarla y no hay suscripciones mensuales.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Realmente funciona sin internet?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, completamente. Una vez instalada, la IA funciona 100% offline. Tus datos y la inteligencia artificial están en tu dispositivo, por lo que puedes trabajar en cualquier lugar sin conexión a internet.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Es realmente portátil?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutamente. Puedes instalarla en un SSD externo, M.2 o USB y llevarla contigo. La IA y tus datos van donde tú vas: de tu laptop a tu PC, de la oficina a casa. Siempre contigo, siempre privada.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué requisitos técnicos necesito?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Para tareas cotidianas y documentos, no necesitas GPU, TPU ni NPU especiales. Funciona en laptops y PCs comunes con Windows o Linux. Nosotros te asesoramos para elegir la mejor configuración según tu presupuesto y necesidades.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Hay costos de suscripción?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No. Puedes elegir un modelo sin suscripciones mensuales. Pago único, sin OpenAI, sin Google, sin Microsoft. Tu IA, tu inversión con extenso ciclo de vida. Sin sorpresas ni facturas recurrentes.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Mis datos están realmente seguros?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Totalmente. Tus datos nunca salen de tu dispositivo. Cero datos en la nube, cero terceros, sin "términos de servicio" que aceptar. Solo tú decides qué información procesa tu IA. Privacidad y confidencialidad garantizadas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué tipo de datos puedo usar?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>PDFs, CSVs, documentos de Word, Excel, correos electrónicos, archivos de Google Drive, y más. Lo que tú decidas. La IA aprende de tus datos personales o de tu organización, manteniéndolos siempre privados y seguros.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Quién puede beneficiarse de esta solución?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Profesionales y organizaciones que valoran la privacidad:</p>
+                    <ul>
+                        <li>Ingenieros, contadores, auditores</li>
+                        <li>Médicos y profesionales de la salud</li>
+                        <li>Abogados y consultores</li>
+                        <li>Docentes e investigadores</li>
+                        <li>Diseñadores gráficos y productores</li>
+                        <li>Empresas e instituciones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Incluye instalación y capacitación?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí. Ofrecemos instalación llave en mano. Te instalamos todo y creamos un ambiente piloto en tu equipo para que veas los resultados en minutos. También incluimos capacitación según el paquete que elijas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Puedo escalar la solución después?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Por supuesto. Comienza en tu laptop o PC y escala a servidor o clusters de servidores cuando lo necesites, sin cambiar de plataforma. La solución crece contigo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cómo solicito una demostración?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Es muy fácil. Contáctanos por WhatsApp (+593-95-959-5168), Telegram (@RicardoOrtegaO), o por email (contacto@libresoft.ec). Te ofrecemos una consulta gratuita y demostramos cómo funciona la IA sin conexión a internet.</p>
                 </div>
             </div>
         </div>
@@ -1084,10 +1305,26 @@
         // Smooth scroll behavior for buttons
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('click', function() {
-                if (this.textContent.includes('Comenzar')) {
+                if (this.textContent.includes('Comenzar') || this.textContent.includes('Conocer más')) {
                     document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-                } else if (this.textContent.includes('Demostración')) {
-                    alert('Formulario de contacto - próximamente integrado');
+                }
+            });
+        });
+
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
                 }
             });
         });
