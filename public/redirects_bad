@@ -1,8 +1,0 @@
-# Redirects para Cloudflare Pages
-# Este archivo es específico para Cloudflare
-
-# Redireccionar index.html a raíz
-/index.html  /  301
-
-# Página 404 personalizada
-/*  /404.html  404
