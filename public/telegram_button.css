@@ -1,0 +1,127 @@
+/* ========================================
+   TELEGRAM BUTTON STYLES
+   To use this component, include this CSS file and add the following HTML to your page:
+   
+   <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="telegram-float" title="Contactar por Telegram">
+       <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+           <!-- Telegram SVG icon -->
+       </svg>
+   </a>
+   
+   Also include this script file for animations:
+   <script src="telegram_button.js"></script>
+======================================== */
+
+.telegram-float {
+    position: fixed;
+    bottom: var(--telegram-bottom-offset, 30px);
+    left: 30px; /* Position on the left side */
+    width: 60px;
+    height: 60px;
+    background: var(--telegram-primary-color, #0088cc);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);
+    z-index: 10000;
+    transition: all 0.3s ease;
+    animation: telegramPulse 2s infinite;
+}
+
+.telegram-float:hover {
+    background: var(--telegram-secondary-color, #006699);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+}
+
+.telegram-float svg {
+    transition: transform 0.3s ease;
+}
+
+.telegram-float:hover svg {
+    transform: scale(1.1);
+}
+
+/* Initial attention animation */
+.telegram-float.initial-animation {
+    animation: telegramAttention var(--telegram-animation-duration, 1.5s) ease 1s 1 normal forwards;
+}
+
+.telegram-float.scroll-animation {
+    animation: telegramScrollAttention var(--telegram-scroll-duration, 1s) ease;
+}
+
+/* Animación de pulso para llamar la atención */
+@keyframes telegramPulse {
+    0% {
+        box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(0, 136, 204, 0.6);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);
+    }
+}
+
+/* Animación inicial de atención */
+@keyframes telegramAttention {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);
+    }
+    50% {
+        transform: scale(var(--telegram-initial-scale, 1.4));
+        box-shadow: 0 8px 25px rgba(0, 136, 204, 0.6);
+        background: var(--telegram-secondary-color, #006699);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 16px rgba(0, 136, 204, 0.3);
+    }
+}
+
+/* Animación de atención al hacer scroll */
+@keyframes telegramScrollAttention {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(var(--telegram-scroll-scale, 1.2));
+        background: var(--telegram-secondary-color, #006699);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive para Telegram */
+@media (max-width: 768px) {
+    .telegram-float {
+        width: 55px;
+        height: 55px;
+        bottom: calc(var(--telegram-bottom-offset, 30px) + 10px);
+        left: 20px;
+    }
+    
+    .telegram-float svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .telegram-float {
+        width: 50px;
+        height: 50px;
+        bottom: calc(var(--telegram-bottom-offset, 30px) + 15px);
+        left: 15px;
+    }
+    
+    .telegram-float svg {
+        width: 26px;
+        height: 26px;
+    }
+}
