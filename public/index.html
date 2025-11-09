@@ -574,6 +574,16 @@
             line-height: 1.5;
         }
 
+        .benefit-item a {
+            transition: all 0.3s;
+        }
+
+        .benefit-item a:hover {
+            color: #22c55e !important;
+            transform: translateX(5px);
+            display: inline-block;
+        }
+
         /* FAQ Section */
         .faq {
             padding: 6rem 2rem;
@@ -904,6 +914,7 @@
                 <li><a href="#benefits">Portable</a></li>
                 <li><a href="#benefits">Con sus datos</a></li>
                 <li><a href="#faq">FAQ</a></li>
+                <li><a href="#references">Referencias</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
 
@@ -925,6 +936,7 @@
                 <li><a href="#benefits" onclick="closeSidebar()">Portable</a></li>
                 <li><a href="#benefits" onclick="closeSidebar()">Con sus datos</a></li>
                 <li><a href="#faq" onclick="closeSidebar()">FAQ</a></li>
+                <li><a href="#references" onclick="closeSidebar()">Referencias</a></li>
                 <li><a href="#contact" onclick="closeSidebar()">Contacto</a></li>
             </ul>
         </aside>
@@ -1174,8 +1186,68 @@
         </div>
     </section>
 
+    <!-- References Section -->
+    <section id="references" class="benefits">
+        <div class="benefits-container">
+            <h2 class="section-title">Referencias y <span class="gradient-text">Recursos</span></h2>
+            <p style="text-align: center; color: #b0b0b0; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Información verificada sobre IA local, privacidad de datos y tecnologías de almacenamiento optimizado para modelos de lenguaje.
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>🤖 Ollama - IA Local Open Source</h4>
+                    <p>Plataforma líder para ejecutar modelos de lenguaje localmente. Documentación completa sobre cómo implementar IA sin conexión a internet.</p>
+                    <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → ollama.com
+                    </a>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🔒 Privacy Risks of AI Chatbots</h4>
+                    <p>Artículo de Mozilla sobre los riesgos de privacidad al usar chatbots web como ChatGPT, Gemini y otros servicios en la nube.</p>
+                    <a href="https://foundation.mozilla.org/en/privacynotincluded/articles/what-are-the-privacy-risks-of-ai-chatbots/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → foundation.mozilla.org
+                    </a>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>📊 Vector Databases for AI</h4>
+                    <p>Guía de Pinecone sobre bases de datos vectoriales, la tecnología que optimiza el almacenamiento y recuperación de información para modelos de IA.</p>
+                    <a href="https://www.pinecone.io/learn/vector-database/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → pinecone.io/learn
+                    </a>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🏠 LangChain - RAG Local</h4>
+                    <p>Framework para construir aplicaciones de IA con Retrieval-Augmented Generation (RAG), permitiendo que la IA use tus propios documentos de forma privada.</p>
+                    <a href="https://python.langchain.com/docs/tutorials/rag/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → python.langchain.com
+                    </a>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🛡️ GDPR & AI Data Privacy</h4>
+                    <p>Información oficial de la Unión Europea sobre protección de datos personales y los riesgos de compartir información con servicios de IA en la nube.</p>
+                    <a href="https://gdpr.eu/artificial-intelligence/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → gdpr.eu
+                    </a>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>💾 ChromaDB - Vector Store</h4>
+                    <p>Base de datos vectorial open-source diseñada específicamente para aplicaciones de IA. Permite almacenar y consultar embeddings de forma eficiente y local.</p>
+                    <a href="https://www.trychroma.com/" target="_blank" rel="noopener noreferrer" style="color: #a855f7; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                        → trychroma.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
-    <section id="contact" class="cta-section">
+    <section id="contact" class="cta-section"></section>
         <h2>¿Listo para tu IA Portátil y Privada?</h2>
         <p style="color: #b0b0b0; margin-bottom: 2rem; font-size: 1.1rem;">Consulta gratis. Demostramos cómo tu IA funciona sin conexión a internet, desde dispositivos Windows y Linux de uso común.</p>
         
