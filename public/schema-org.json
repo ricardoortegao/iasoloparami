@@ -1,0 +1,90 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "IA solo para Mí - LibreSoft Ecuador",
+  "alternateName": "LibreSoft Ecuador",
+  "url": "https://iasoloparami.libresoft.ec",
+  "logo": "https://iasoloparami.libresoft.ec/logo.png",
+  "description": "Inteligencia Artificial privada, segura, confidencial con datos propios. Soluciones de IA local y portátil sin necesidad de internet ni suscripciones.",
+  "foundingDate": "2025",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. América N36-191",
+    "addressLocality": "Quito",
+    "addressRegion": "Pichincha",
+    "addressCountry": "EC"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "-0.1807",
+    "longitude": "-78.4678"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+593-2-252-4710",
+      "contactType": "customer service",
+      "areaServed": "EC",
+      "availableLanguage": ["Spanish"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+593-2-510-7520",
+      "contactType": "technical support",
+      "areaServed": "EC",
+      "availableLanguage": ["Spanish"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+593-95-959-5168",
+      "contactType": "sales",
+      "areaServed": "EC",
+      "availableLanguage": ["Spanish"]
+    }
+  ],
+  "email": [
+    "contacto@libresoft.ec",
+    "soporte@libresoft.ec",
+    "info@libresoft.ec"
+  ],
+  "telephone": [
+    "+593-2-252-4710",
+    "+593-2-510-7520",
+    "+593-95-959-5168"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "17:00"
+  },
+  "sameAs": [
+    "https://wa.me/593959595168",
+    "https://t.me/RicardoOrtegaO",
+    "https://www.facebook.com/libresoftecuador",
+    "https://www.instagram.com/@recuperamosdatosecuador",
+    "https://www.tiktok.com/@ricardo.ortega.o",
+    "https://www.youtube.com/@facturaap",
+    "https://www.twitter.com/@ricardoortegaec"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Ecuador"
+  },
+  "serviceType": [
+    "Inteligencia Artificial Local",
+    "Soluciones de IA Privada",
+    "IA Portátil",
+    "Consultoría en IA",
+    "Instalación de IA Local"
+  ],
+  "priceRange": "$$",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "currenciesAccepted": "USD"
+}
