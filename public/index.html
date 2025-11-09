@@ -1,177 +1,722 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM Chat App</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA en mi Laptop - Inteligencia Artificial Local y Portátil</title>
     <style>
-      :root {
-        --primary-color: #f6821f;
-        --primary-hover: #e67e22;
-        --light-bg: #f9fafb;
-        --border-color: #e5e7eb;
-        --text-color: #1f2937;
-        --text-light: #6b7280;
-        --user-msg-bg: #fff2e6;
-        --assistant-msg-bg: #f3f4f6;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+        html {
+            scroll-behavior: smooth;
+        }
 
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-          Cantarell, sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
 
-      header {
-        text-align: center;
-        margin-bottom: 2rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--border-color);
-      }
+        /* Gradient animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-      h1 {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-      }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
 
-      .chat-container {
-        display: flex;
-        flex-direction: column;
-        height: calc(100vh - 200px);
-        min-height: 400px;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        overflow: hidden;
-      }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8), 0 0 60px rgba(34, 197, 94, 0.5); }
+        }
 
-      .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 1rem;
-        background-color: var(--light-bg);
-      }
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
 
-      .message {
-        margin-bottom: 1rem;
-        padding: 0.75rem;
-        border-radius: 8px;
-        max-width: 80%;
-      }
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
 
-      .user-message {
-        background-color: var(--user-msg-bg);
-        align-self: flex-end;
-        margin-left: auto;
-      }
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-      .assistant-message {
-        background-color: var(--assistant-msg-bg);
-        align-self: flex-start;
-      }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-      .message-input {
-        display: flex;
-        padding: 0.75rem;
-        border-top: 1px solid var(--border-color);
-        background-color: white;
-      }
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+        }
 
-      #user-input {
-        flex: 1;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        font-family: inherit;
-        resize: none;
-        min-height: 44px;
-      }
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #a855f7, #22c55e, #3b82f6, #ec4899);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
 
-      #send-button {
-        margin-left: 0.5rem;
-        padding: 0 1rem;
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
 
-      #send-button:hover {
-        background-color: var(--primary-hover);
-      }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #a855f7;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
 
-      #send-button:disabled {
-        background-color: var(--text-light);
-        cursor: not-allowed;
-      }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
 
-      .typing-indicator {
-        display: none;
-        margin-bottom: 1rem;
-        font-style: italic;
-        color: var(--text-light);
-      }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
 
-      .typing-indicator.visible {
-        display: block;
-      }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
 
-      footer {
-        margin-top: 1rem;
-        text-align: center;
-        font-size: 0.85rem;
-        color: var(--text-light);
-      }
+        /* Desktop Menu */
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #a855f7;
+        }
+
+        /* Sidebar Mobile */
+        .sidebar {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 250px;
+            height: calc(100vh - 70px);
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(168, 85, 247, 0.2);
+            z-index: 999;
+            animation: slideIn 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            display: block;
+        }
+
+        .sidebar ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-left-color: #a855f7;
+            color: #a855f7;
+        }
+
+        /* Responsive - Mobile First */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar {
+                display: none !important;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.1));
+            animation: gradientShift 6s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #a855f7, #22c55e, #3b82f6, #ec4899, #f59e0b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .portability-highlight {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(34, 197, 94, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            font-weight: 500;
+        }
+
+        .portability-highlight strong {
+            color: #a855f7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            animation: glow 3s ease infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #a855f7;
+            border: 2px solid #a855f7;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(168, 85, 247, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 4rem;
+        }
+
+        .section-title .gradient-text {
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(34, 197, 94, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-10px);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #a855f7, #22c55e, #3b82f6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.05), rgba(59, 130, 246, 0.05));
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            padding: 1.5rem;
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 4px solid;
+            border-image: linear-gradient(135deg, #a855f7, #22c55e, #3b82f6) 1;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            background: rgba(168, 85, 247, 0.12);
+        }
+
+        .benefit-item h4 {
+            color: #a855f7;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .benefit-item p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(34, 197, 94, 0.05));
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 6vw, 2rem);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #808080;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                margin-bottom: 0;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .hero {
+                margin-top: 0;
+                padding: 1rem;
+                min-height: auto;
+                padding-top: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portability-highlight {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <!-- Header -->
     <header>
-      <h1>Cloudflare AI Chat</h1>
-      <p>Powered by Cloudflare Workers AI</p>
+        <nav>
+            <a href="#" class="logo-container">
+<svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="l3-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="l3-multi" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="33%" style="stop-color:#22c55e;stop-opacity:1" />
+                            <stop offset="66%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Monitor All-in-One -->
+                    <rect x="20" y="18" width="60" height="48" rx="6" fill="none" stroke="url(#l3-purple)" stroke-width="2.5"/>
+                    
+                    <!-- Soporte vertical -->
+                    <rect x="46" y="66" width="8" height="8" fill="none" stroke="url(#l3-purple)" stroke-width="2"/>
+                    
+                    <!-- Base horizontal -->
+                    <rect x="30" y="74" width="40" height="3" rx="1.5" fill="url(#l3-purple)"/>
+                    
+                    <!-- Bombilla multicolor -->
+                    <circle cx="50" cy="35" r="8" fill="none" stroke="url(#l3-multi)" stroke-width="2.5"/>
+                    <circle cx="50" cy="35" r="5" fill="url(#l3-multi)" opacity="0.4"/>
+                    <path d="M 45 42 Q 45 45 48 46 L 52 46 Q 55 45 55 42" fill="url(#l3-multi)"/>
+                    <rect x="47" y="46" width="6" height="4" fill="url(#l3-multi)"/>
+                </svg>
+                
+                <span class="logo-text">IA en mi Laptop</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#benefits">Beneficios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- Sidebar Mobile -->
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="#features" onclick="closeSidebar()">Características</a></li>
+                <li><a href="#benefits" onclick="closeSidebar()">Beneficios</a></li>
+                <li><a href="#contact" onclick="closeSidebar()">Contacto</a></li>
+            </ul>
+        </aside>
     </header>
 
-    <div class="chat-container">
-      <div id="chat-messages" class="chat-messages">
-        <div class="message assistant-message">
-          <p>
-            Hello! I'm an LLM chat app powered by Cloudflare Workers AI. How can
-            I help you today?
-          </p>
+    <!-- Hero Section -->
+    <section class="hero" id="hero" style="padding:20px 20px;border:0 0;margin:0 0;">
+        <div class="hero-content" style="padding:20px 20px;border:0 0;margin:0 0;">
+            <h1>Inteligencia Artificial<br><span class="gradient-text">privada, segura, confidencial, datos propios, va a donde va la laptop. No necesita internet.</span></h1>
+            
+            <div class="portability-highlight">
+                <strong>La IA y tus datos van contigo y solo contigo.</strong> Sin subirlos a ninguna nube, sin fuga de datos, sin suscripciones, sin planes, sin "términos de servicio", sin miradas curiosas.
+            </div>
+
+            <p>Disponible también para computadores y servidores. Confidencialidad garantizada. Cero costes de suscripción. Tu inteligencia artificial, tu inteligente y siempre dispuesto asistente personal. Le puedes hablar, hacer preguntas, dar órdenes, te responde con texto, audio, imágenes, videos, documentos, gráficos. Solo le falta la forma humanoide.</p>
+            
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Conocer más</button>
+                <button class="btn btn-secondary">Agendar una Demo</button>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="typing-indicator" id="typing-indicator">
-        AI is thinking...
-      </div>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">¿Por qué elegir <span class="gradient-text">IA en mi Laptop</span>?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacidad Total</h3>
+                <p>Tus datos nunca salen de tu dispositivo. Ni OpenAI, ni Google Cloud, ni "términos de servicio" que aceptar. Solo tú.</p>
+            </div>
 
-      <div class="message-input">
-        <textarea
-          id="user-input"
-          placeholder="Type your message here..."
-          rows="1"
-          autofocus
-        ></textarea>
-        <button id="send-button">Send</button>
-      </div>
-    </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎒</div>
+                <h3>100% Portátil</h3>
+                <p>Tu IA y tus datos caben en un USB. Transfiere todo entre dispositivos: laptop, tablet, servidor. La IA va donde tú vas.</p>
+            </div>
 
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Ultraligero</h3>
+                <p>Usa 97% menos almacenamiento que soluciones tradicionales. Funciona desde una laptop decente hasta servidores.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Escalable</h3>
+                <p>Comienza en tu tablet y escala a clusters de servidores cuando lo necesites. Sin cambiar de plataforma.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Sin Alucinaciones</h3>
+                <p>Solo información verificada de tu organización. Control total sobre los datos que alimentan tu IA.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Cero Suscripciones</h3>
+                <p>Pago único. Sin cuotas mensuales. Tu IA por siempre. Sin sorpresas en facturas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="benefits-container">
+            <h2 class="section-title">Soluciones Adaptadas a <span class="gradient-text">tu Necesidad</span></h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>🎯 Portabilidad Garantizada</h4>
+                    <p>Tus datos van contigo. De tu laptop a tu tablet. De tu oficina a tu casa. Siempre con ti.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🔐 Confidencialidad Total</h4>
+                    <p>Cero datos en la nube. Cero terceros. Solo tú decides qué información comparte tu IA.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>💵 Sin Suscripciones</h4>
+                    <p>Pago único. Sin OpenAI. Sin Google. Sin sorpresas. Tu IA, tu inversión, para siempre.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🚀 Llave en Mano</h4>
+                    <p>Te instalamos todo. Ambiente piloto en tu equipo. Ver para creer en minutos.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>📊 Tus Datos</h4>
+                    <p>PDFs, CSVs, correos, Google Drive. Lo que tú decidas. Privado. Seguro. Escalable.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>🖥️ Multiplataforma</h4>
+                    <p>Linux, Windows, macOS. Tablet, laptop, servidor. Una IA que se adapta a ti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <h2>¿Listo para tu IA Portátil y Privada?</h2>
+        <p style="color: #b0b0b0; margin-bottom: 2rem; font-size: 1.1rem;">Consulta gratis. Demostramos cómo tu IA funciona sin conexión a internet, desde cualquier dispositivo.</p>
+        <button class="btn btn-primary">Solicitar Demostración</button>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      <p>Cloudflare Workers AI Chat Template &copy; 2025</p>
+        <p>&copy; 2025 IA en mi Laptop. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Inteligencia Artificial Local • Portátil • Privada • Sin Suscripciones</p>
     </footer>
 
-    <!-- Chat app script -->
-    <script src="chat.js"></script>
-  </body>
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        });
+
+        function closeSidebar() {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('active');
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideSidebar && !isClickOnHamburger && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
+
+        // Smooth scroll behavior for buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Comenzar')) {
+                    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+                } else if (this.textContent.includes('Demostración')) {
+                    alert('Formulario de contacto - próximamente integrado');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
