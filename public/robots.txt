@@ -1,0 +1,38 @@
+# robots.txt para IA solo para Mí
+# https://iasoloparami.libresoft.ec/robots.txt
+
+User-agent: *
+Allow: /
+
+# Archivos y directorios permitidos
+Allow: /index.html
+Allow: /*.css
+Allow: /*.js
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.webp
+
+# Archivos que no deben ser indexados
+Disallow: /cgi-bin/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://iasoloparami.libresoft.ec/sitemap.xml
+
+# Crawl-delay para bots más agresivos
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Bloquear bots maliciosos conocidos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
