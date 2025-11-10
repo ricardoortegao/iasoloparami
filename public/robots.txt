@@ -1,0 +1,14 @@
+# robots.txt para IA solo para Mí
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://iasoloparami.libresoft.ec/sitemap.xml
+
+# Crawl-delay para bots más agresivos
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
