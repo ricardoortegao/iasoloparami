@@ -1,0 +1,53 @@
+# Headers para Cloudflare - Permitir iframes del mismo origen
+# auditoriadesoftware.com
+
+/*
+  # Permitir iframes del mismo origen (IMPORTANTE para el menú)
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # Performance
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/*.html
+  # HTML específico - Permitir carga en iframe
+  X-Frame-Options: SAMEORIGIN
+  Cache-Control: public, max-age=1800, must-revalidate
+
+/index.html
+  # Página principal - Sin restricciones de frame
+  X-Frame-Options: SAMEORIGIN
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/*.css
+  # CSS
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+
+/*.js
+  # JavaScript
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+/sw.js
+  # Service Worker - No cache
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+
+/manifest.json
+  # PWA Manifest
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json; charset=utf-8
+
+/sitemap.xml
+  # Sitemap
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  # Robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8
