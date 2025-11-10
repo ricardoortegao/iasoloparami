@@ -1,5 +1,0 @@
-# Página 404 personalizada
-/404 /404.html 404
-
-# Nota: Cloudflare Pages sirve index.html automáticamente
-# No se necesitan reglas adicionales para el comportamiento por defecto
