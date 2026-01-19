@@ -322,7 +322,7 @@
         }
 
         /* Responsive - Mobile First */
-        @media (max-width: 768px) {
+        @media (max-width: 1359px) {
             .hamburger {
                 display: flex;
             }
@@ -332,7 +332,7 @@
             }
         }
 
-        @media (min-width: 769px) {
+        @media (min-width: 1360px) {
             .sidebar {
                 display: none !important;
             }
@@ -340,14 +340,14 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 2rem;
-            margin-top: 70px;
+            padding: 75px 2rem 1rem; /* Add padding to push content down */
+            margin-top: -75px; /* Use negative margin to pull background up */
         }
 
         .hero::before {
@@ -363,12 +363,46 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            max-width: 900px;
-            animation: float 6s ease-in-out infinite;
+            max-width: 90%; /* Changed from 900px to 90% */
+            width: 100%; /* Ensure it takes full width up to max-width */
         }
 
+        /* Video and Text Grid */
+        .hero-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* Changed to 3 columns */
+            gap: 2rem;
+            align-items: start; /* Changed from stretch to start */
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .info-box-3d {
+            background: rgba(30, 30, 30, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.4), inset 0 0 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Responsive stack for the grid */
+        @media (max-width: 999px) {
+            .hero-grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
         .hero h1 {
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(1rem, 4vw, 1.75rem);
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
@@ -394,7 +428,7 @@
             border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 12px;
             padding: 1.5rem;
-            margin: 2rem 0;
+            margin: 0; /* Removed vertical margin to fix alignment */
             font-size: clamp(0.95rem, 3vw, 1.1rem);
             font-weight: 500;
         }
@@ -455,15 +489,15 @@
 
         /* Features Section */
         .features {
-            padding: 6rem 2rem;
-            max-width: 1200px;
+            padding: 3rem 2rem; /* Reduced top padding from 6rem */
+            max-width: 1400px; /* Expanded max-width to allow more horizontal space for grid items */
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
             font-size: clamp(1.8rem, 6vw, 2.5rem);
-            margin-bottom: 4rem;
+            margin-bottom: 2rem; /* Reduced from 4rem */
         }
 
         .section-title .gradient-text {
@@ -475,7 +509,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted min-width to allow 4 columns on larger screens */
             gap: 2rem;
         }
 
@@ -790,7 +824,7 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1359px) {
             header {
                 margin-bottom: 0;
             }
@@ -803,7 +837,7 @@
                 margin-top: 0;
                 padding: 1rem;
                 min-height: auto;
-                padding-top: 3rem;
+                padding-top: 1rem; /* Reduced from 3rem */
             }
 
             .hero h1 {
@@ -950,15 +984,24 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero" style="padding:20px 20px;border:0 0;margin:0 0;">
-        <div class="hero-content" style="padding:20px 20px;border:0 0;margin:0 0;">
+    <section class="hero" id="hero">
+        <div class="hero-content">
             <h1>Inteligencia Artificial<br><span class="gradient-text">privada, segura, confidencial, datos propios, va a donde va la laptop. No necesita internet.</span></h1>
-            
-            <div class="portability-highlight">
-                <strong>Tu asistente digital y tus datos van contigo y solo contigo. Incansable, super inteligente, siempre a tus órdenes. Reconoce tu propia voz o a lo que escribas, en lenguaje natural, español, inglés, el que decidas. Te responde con audio o con texto en pantalla. </strong> Sin fuga de datos, sin subirlos a ninguna nube, sin suscripciones, sin planes, sin "términos de servicio", sin miradas curiosas.
-            </div>
 
-            <p>Disponible también para computadores y servidores. Confidencialidad garantizada. Cero costes de suscripción. Tu inteligencia artificial, tu inteligente y siempre dispuesto asistente personal. Le puedes hablar, hacer preguntas, dar órdenes, te responde con texto, audio, imágenes, videos, documentos, gráficos. Solo le falta la forma humanoide.</p>
+            <div class="hero-grid-container">
+                <div class="portability-highlight">
+                    <strong>Tu asistente digital y tus datos van contigo y solo contigo. Incansable, super inteligente, siempre a tus órdenes. Reconoce tu propia voz o a lo que escribas, en lenguaje natural, español, inglés, el que decidas. Te responde con audio o con texto en pantalla. </strong> Sin fuga de datos, sin subirlos a ninguna nube, sin suscripciones, sin planes, sin "términos de servicio", sin miradas curiosas.
+                </div>
+                                <div class="video-container">
+                                    <video width="100%" style="max-width: 800px; border-radius: 12px; display: block; width: 100%;" controls poster="ia_local.jpg">
+                                        <source src="ia_local.mp4" type="video/mp4">
+                                        Tu navegador no soporta el tag de video.
+                                    </video>
+                                </div>
+                                <div class="info-box-3d">
+                                    <p>Disponible también para computadores y servidores. Confidencialidad garantizada. Cero costes de suscripción. Tu inteligencia artificial, tu inteligente y siempre dispuesto asistente personal. Le puedes hablar, hacer preguntas, dar órdenes, te responde con texto, audio, imágenes, videos, documentos, gráficos. Solo le falta la forma humanoide.</p>
+                                </div>
+                            </div>
             
             <div class="cta-buttons">
                 <button class="btn btn-primary">Conocer más</button>
@@ -969,7 +1012,7 @@
 
     <!-- Features Section -->
     <section id="features" class="features">
-        <h2 class="section-title">¿Por qué <span class="gradient-text">IA solo para Mí</span>?</h2>
+        <h2 class="section-title">¿ Por qué <span class="gradient-text">IA solo para Mí</span> ?</h2>
         
         <div class="features-grid">
             <div class="feature-card">
